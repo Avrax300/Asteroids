@@ -10,6 +10,13 @@ def main():
     # initializes pygame
     pygame.init()
 
+    # sets groups
+    updatables = pygame.sprite.Group()
+    drawables = pygame.sprite.Group()
+
+    # adds the Player class to both groups
+    Player.containers = (updatables, drawables)
+
     # creates a GUI window
     screen = pygame.display.set_mode((SCREEN_WIDTH, SCREEN_HEIGHT))
 
@@ -27,12 +34,13 @@ def main():
                 return
 
         # rotates the player left or right depending on input
-        player.update(dt)
+        updatables.update(dt)
 
         screen.fill("black")
 
-        # draws the player on screen
-        player.draw(screen)
+        # draws the sprites on screen
+        for drawable in drawables:
+            drawable.draw(screen)
 
         pygame.display.flip()
 
