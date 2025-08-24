@@ -37,12 +37,14 @@ class Player(CircleShape):
         bullet.velocity = pygame.Vector2.rotate(bullet.velocity, self.rotation)
         bullet.velocity *= PLAYER_SHOT_SPEED
 
-    # updates the player's position
+    # updates the player's state
     def update(self, dt):
         keys = pygame.key.get_pressed()
 
+        #handles the shoot cooldown
         self.timer -= dt
 
+        # handles the user's inputs
         if keys[pygame.K_a]:
             self.rotate(-abs(dt))
         if keys[pygame.K_d]:
@@ -52,6 +54,7 @@ class Player(CircleShape):
         if keys[pygame.K_s]:
             self.move(-abs(dt))
         if keys[pygame.K_SPACE]:
+            # verifies that the shoot ability is off cooldown befor calling shoot()
             if self.timer <= 0:
                 self.timer = PLAYER_SHOOT_COOLDOWN
                 self.shoot()

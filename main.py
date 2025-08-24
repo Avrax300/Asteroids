@@ -48,10 +48,17 @@ def main():
         # rotates the player left or right depending on input
         updatables.update(dt)
 
-        # checks for collisions
+        # checks for collisions bettwen asteroids and player
         for asteroid in asteroids:
             if asteroid.collision_check(player) == True:
                 sys.exit("Game over!")
+
+        #checks for collisions between asteroids and bullets
+        for asteroid in asteroids:
+            for shot in shots:
+                if asteroid.collision_check(shot) == True:
+                    asteroid.kill()
+                    shot.kill()
 
         screen.fill("black")
 
