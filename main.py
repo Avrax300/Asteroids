@@ -26,6 +26,9 @@ def main():
             if event.type == pygame.QUIT:
                 return
 
+        # rotates the player left or right depending on input
+        player.update(dt)
+
         screen.fill("black")
 
         # draws the player on screen
