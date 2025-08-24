@@ -1,3 +1,4 @@
+import sys
 from constants import *
 from player import Player
 from asteroidfield import AsteroidField
@@ -43,6 +44,12 @@ def main():
 
         # rotates the player left or right depending on input
         updatables.update(dt)
+
+        # checks for collisions
+        for asteroid in asteroids:
+            if asteroid.collision_check(player) == True:
+                sys.exit("Game over!")
+
 
         screen.fill("black")
 
